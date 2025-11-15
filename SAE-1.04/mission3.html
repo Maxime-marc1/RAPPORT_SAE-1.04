@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission 3 - Projet KDOU</title>
+    <link rel="stylesheet" href="assets/CSS/style.css">
+</head>
+<body>
+
+<header>
+    <nav>
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </label>
+        <ul class="nav-links">
+            <li><a href="accueil.html">Accueil</a></li>
+            <li><a href="mission1.html">Mission 1</a></li>
+            <li><a href="mission2.html">Mission 2</a></li>
+            <li><a href="mission3.html">Mission 3</a></li>
+            <li><a href="conclusion.html">Conclusion</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h1>Mission 3 : Indicateurs Avancés (SQL)</h1>
+    <h2>Jawad SAJID, Mael BERTHELOT, Noan KOUKA et Maxime MARC</h2>
+    
+    <h3>Contexte</h3>
+    <p>
+        La dernière mission s'est concentrée sur des analyses plus complexes en utilisant du <strong>SQL avancé</strong>. Nous avons travaillé sur une <strong>nouvelle version de la base de données</strong>, enrichie et mieux structurée (par exemple, avec l'ajout d'une table `Pays` dédiée, améliorant la <strong>normalisation</strong> et la fiabilité des requêtes géographiques). L'interface QBE n'étant plus suffisante pour ces indicateurs calculés, le SQL pur était nécessaire.
+    </p>
+    
+    <h3>Indicateurs intéressants de la base de données</h3>
+    <p><em>(Note : Conformément aux consignes, voici les indicateurs proposés par les membres de l'équipe.)</em></p>
+
+    <h4>Indicateur 1 : Optimisation logistique et circuit-court</h4>
+    <p>
+        <strong>Objectif :</strong> Quels sont les fournisseurs et clients qui se trouvent dans la même ville ?
+    </p>
+    <p>
+        L'intérêt de cette requête est double. D'une part, elle permet une <strong>optimisation logistique</strong> en identifiant des opportunités de regroupement de transports. D'autre part, elle répond directement à l'objectif d'<strong>éco-responsabilité</strong> de KDOU : en favorisant un <strong>circuit court</strong> (fournisseur local vers client local), l'entreprise peut activement réduire son empreinte carbone liée aux livraisons.
+    </p>
+    <img src="assets/Images/Mission%203/indicateur1.png" alt="Résultat de l'indicateur 1 Mission 3" style="width:100%; max-width:600px;">
+    
+    <h5>Code SQL :</h5>
+    <p class="CodeSQL">
+        SELECT DISTINCT <br>
+        Fournisseur.Societe AS Fournisseur, <br>
+        Clientele.Societe AS Client,<br>
+        Fournisseur.Ville AS Ville<br>
+        FROM<br>
+        (
+        Fournisseur<br>
+        INNER JOIN Produit ON Fournisseur.NoFour = Produit.NoFour
+        ) <br>
+        INNER JOIN (
+        (
+        Cliente
+        INNER JOIN Commande ON Clientele.CodeCli = Commande.CodeCli
+        ) <br>
+        INNER JOIN DetailCommande ON Commande.[N° commande] = DetailCommande.[N° commande]
+        ) ON Produit.RefProd = DetailCommande.[Réf produit]<br>
+        WHERE<br>
+        Fournisseur.Ville = Clientele.Ville<br>
+        AND Fournisseur.NoPays = Clientele.NoPays
+    </p>
+
+    <hr style="margin: 40px 0; border: 1px solid #C49D83;">
+    
+    <h4>Indicateur 2 : Sourcing et approvisionnement européen</h4>
+    <p>
+        <strong>Objectif :</strong> Lister tous les produits provenant de pays membres de l'Union Européenne.
+    </p>
+    <p>
+        Cette requête aide KDOU à valoriser son image "éco-friendly". En identifiant facilement les produits d'<strong>origine UE</strong>, l'entreprise peut les mettre en avant dans son marketing, un argument fort pour les clients sensibles à l'empreinte carbone et à l'économie locale (européenne).
+    </p>
+    <img src="assets/Images/Mission 3/Indicateur-UE.png" alt="Résultat des produits d'origine UE" style="width:100%; max-width:600px;">
+    
+    <h5>Code SQL :</h5>
+    <p class="CodeSQL">
+        SELECT<br>
+        Pays.PaysFR AS Pays,<br>
+        Produit.NomProd AS Produit,<br>
+        Categorie.NomCateg AS Catégorie,<br>
+        Fournisseur.Societe AS Fournisseur<br>
+        FROM<br>
+        ((Produit<br>
+        INNER JOIN Categorie ON Produit.CodeCateg = Categorie.CodeCateg)<br>
+        INNER JOIN Fournisseur ON Produit.NoFour = Fournisseur.NoFour)<br>
+        INNER JOIN Pays ON Fournisseur.NoPays = Pays.NoPays<br>
+        WHERE<br>
+        Pays.UE = "Membre"<br>
+        ORDER BY<br>
+        Pays.PaysFR,<br>
+        Produit.NomProd;
+    </p>
+
+</main>
+
+<footer>
+    <p>Projet SAE 1.04 - R1.02 | Jawad SAJID, Mael BERTHELOT, Noan KOUKA et Maxime MARC</p>
+</footer>
+
+</body>
+</html>

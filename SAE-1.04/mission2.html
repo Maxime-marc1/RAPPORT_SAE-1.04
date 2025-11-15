@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission 2 - Projet KDOU</title>
+    <link rel="stylesheet" href="assets/CSS/style.css">
+</head>
+<body>
+
+<header>
+    <nav>
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </label>
+        <ul class="nav-links">
+            <li><a href="accueil.html">Accueil</a></li>
+            <li><a href="mission1.html">Mission 1</a></li>
+            <li><a href="mission2.html">Mission 2</a></li>
+            <li><a href="mission3.html">Mission 3</a></li>
+            <li><a href="conclusion.html">Conclusion</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h1>Mission 2 : Exploitation de la Base</h1>
+    <h2>Jawad SAJID, Mael BERTHELOT, Noan KOUKA et Maxime MARC</h2>
+    
+    <h3>Contexte</h3>
+    <p>
+        Pour cette deuxième mission, nous avons migré les données d'Excel vers <strong> Access</strong>. Cet outil a permis de structurer la base de données de manière plus robuste, notamment en définissant des <strong>relations</strong> claires entre les tables. L'objectif était de commencer à exploiter ces données via des requêtes, en utilisant à la fois l'interface graphique <strong>QBE</strong> et le langage <strong>SQL</strong>.
+    </p>
+
+    <h3>Indicateurs de la base de données</h3>
+    
+    <h4>Premier indicateur : Existe-t-il des fournisseurs sans produit ?</h4>
+    <p>
+        Cette requête vise à nettoyer le catalogue de fournisseurs. Identifier ceux qui n'ont aucun produit référencé permet à KDOU de faire un choix stratégique : soit les relancer pour obtenir leur catalogue, soit les <strong>supprimer de la base</strong> pour optimiser la gestion des partenaires et ne pas fausser les statistiques.
+    </p>
+    <img src="assets/Images/Mission%202/Indicateur_1.png" alt="Résultat du premier indicateur" style="width:100%; max-width:500px;">
+    <h5>Code SQL de la requête :</h5>
+    <p class="CodeSQL">
+        SELECT DISTINCT Fournisseur.* <br>
+        FROM Fournisseur <br>
+        WHERE Fournisseur.NoFour NOT IN <br>(
+        SELECT
+        Produit.NoFour
+        FROM
+        Produit
+        );
+    </p>
+
+    <h4>Deuxième indicateur : Clients n'ayant pas encore passé de commande</h4>
+    <p>
+        Identifier les clients "inactifs" est crucial pour l'<strong>action commerciale</strong>. Cette liste permet à l'équipe de KDOU de cibler ces clients avec des offres de bienvenue ou des campagnes de démarchage spécifiques pour <strong>générer de nouvelles ventes</strong> et améliorer la rentabilité.
+    </p>
+    
+    <table>
+        <caption>Résultat : Clients n'ayant pas encore passé de commande</caption>
+        <thead>
+            <tr>
+                <th>CodeCli</th>
+                <th>Societe</th>
+                <th>MailCli</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>DEAGE</td>
+                <td>Délices d'Agen</td>
+                <td>delicesdag@hotmail.com</td>
+            </tr>
+            <tr>
+                <td>KEVIN</td>
+                <td>Chez Kév</td>
+                <td>chezkev@hotmail.fr</td>
+            </tr>
+            <tr>
+                <td>MACHO</td>
+                <td>La maison Chou</td>
+                <td>lamaisonch@orange.fr</td>
+            </tr>
+            <tr>
+                <td>MAIPA</td>
+                <td>La maison dans le Parc</td>
+                <td>lamaisonchev@orange.fr</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <h5>Code SQL de la requête :</h5>
+    <p class="CodeSQL">
+        SELECT Cli.CodeCli, Cli.Societe, Cli.MailCli <br>
+        FROM Clientele AS Cli <br>
+        LEFT JOIN Commande AS Com ON Cli.CodeCli = Com.CodeCli <br>
+        WHERE Com.CodeCli IS NULL <br>
+        ORDER BY Cli.Societe;
+    </p>
+</main>
+
+<footer>
+    <p>Projet SAE 1.04 - R1.02 | Jawad SAJID, Mael BERTHELOT, Noan KOUKA et Maxime MARC</p>
+</footer>
+
+</body>
+</html>

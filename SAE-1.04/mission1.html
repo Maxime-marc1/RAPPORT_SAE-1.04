@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission 1 - Projet KDOU</title>
+    <link rel="stylesheet" href="assets/CSS/style.css">
+</head>
+<body>
+
+<header>
+    <nav>
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </label>
+        <ul class="nav-links">
+            <li><a href="accueil.html">Accueil</a></li>
+            <li><a href="mission1.html">Mission 1</a></li>
+            <li><a href="mission2.html">Mission 2</a></li>
+            <li><a href="mission3.html">Mission 3</a></li>
+            <li><a href="conclusion.html">Conclusion</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h1>Mission 1 : Analyse des Données</h1>
+    <h2>Jawad SAJID, Mael BERTHELOT, Noan KOUKA et Maxime MARC</h2>
+    
+    <h3>Contexte de la mission</h3>
+    <p>
+        La première mission a consisté en une <strong>analyse exploratoire</strong> de la base de données fournie sous format <strong>Excel</strong>. L'objectif principal était de s'approprier l'environnement de données de KDOU : comprendre la structure de chaque table (Clients, Fournisseurs, Commandes...), identifier les <strong>clés primaires et étrangères</strong> et commencer à évaluer la structure globale.
+    </p>
+    
+    <h3>Analyse des données</h3>
+    <p>
+        Cette phase de découverte nous a permis d'évaluer la <strong>qualité des données</strong>. En utilisant des outils simples comme les filtres, les tris et les recherches ciblées, nous avons pu :
+    </p>
+    <ul>
+        <li>Répondre à des questions métier simples (ex: "Combien de clients à Paris ?").</li>
+        <li>Identifier les premiers problèmes d'incohérence (ex: doublons, formats de données non standardisés comme "PaysBas" vs "Netherlands").</li>
+        <li>Prendre note des signalements clients (ex: Maria Larson, Marc Randon) pour les investigations futures.</li>
+    </ul>
+
+    <h3>Perspectives d'amélioration</h3>
+    <p>
+        Suite à cette analyse, nous avons formulé plusieurs recommandations pour fiabiliser la base de données avant une exploitation plus poussée :
+    </p>
+    <ul>
+        <li>
+            <strong>Normalisation et uniformisation des données :</strong>
+            <ul>
+                <li>Harmoniser l'écriture des noms de pays et de villes pour éviter les variations.</li>
+                <li>Corriger et standardiser les informations de contact (emails, codes postaux) pour fiabiliser la communication.</li>
+            </ul>
+        </li>
+        <li>
+            <strong>Amélioration de la structure des tables :</strong>
+            <ul>
+                <li>Vérifier la cohérence de la numérotation des commandes.</li>
+                <li>Clarifier ou supprimer les colonnes vides ou inutilisées (ex: 'À livrer avant') pour simplifier les analyses.</li>
+            </ul>
+        </li>
+        <li>
+            <strong>Optimisation du modèle de données :</strong>
+            <p>
+                Migrer vers un outil SGBD comme <strong>Access</strong> pour gérer les données de façon plus efficace, créer des relations stables entre les tables, et utiliser le <strong>SQL</strong> pour des requêtes complexes, ce qui fera l'objet de la mission suivante.
+            </p>
+        </li>
+    </ul>
+</main>
+
+<footer>
+    <p>Projet SAE 1.04 - R1.02 | Jawad SAJID, Mael BERTHELOT, Noan KOUKA et Maxime MARC</p>
+</footer>
+
+</body>
+</html>

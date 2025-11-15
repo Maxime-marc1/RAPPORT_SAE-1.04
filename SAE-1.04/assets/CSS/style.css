@@ -1,0 +1,210 @@
+/* Réinitialisation globale et configuration du box-sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f5efe6;
+    color: black;
+    font-family: Arial, "Segoe UI", serif;
+    font-size: large;
+    /* Ajout d'un padding-top pour compenser la nav fixe */
+    /* 8vh correspond à la min-height de notre nav */
+    padding-top: 8vh;
+}
+
+/* Conteneur principal pour le contenu */
+main {
+    padding: 25px; /* Ajoute de l'espace autour du contenu */
+    max-width: 900px; /* Centre le contenu sur les grands écrans */
+    margin: 0 auto; /* centrage */
+}
+
+/* Espacement pour les éléments de contenu */
+main > h1, 
+main > h3, 
+main > h4, 
+main > h5, 
+main > p, 
+main > ul, 
+main > table,
+main > img {
+    margin-bottom: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 10px; /* Réduit l'espace sous H1 */
+}
+
+h2 {
+    text-align: center;
+    font-size: 1.1em;  
+    font-style: italic;
+    font-weight: normal;
+    margin-bottom: 30px; /* Espace après les noms */
+}
+
+h3 {
+    font-size: 1.5em;
+    color: #C49D83;
+    border-bottom: 2px solid #C49D83;
+    padding-bottom: 5px;
+}
+
+h4 {
+    font-size: 1.2em;
+}
+
+h5 {
+    font-size: 1.0em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Style pour les blocs de code SQL */
+.CodeSQL {
+    background-color: #ececec;
+    border-left: 5px solid #C49D83;
+    padding: 15px;
+    font-family: Consolas, 'Courier New', monospace;
+    line-height: 1.4;
+    overflow-x: auto; /* Pour le débordement sur mobile */
+}
+
+/*  Configuration de la barre de navigation */
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 8vh;
+    background-color: #C49D83;
+    font-family: 'Poppins', sans-serif;
+    
+    /*  barre de navigation fixée */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* S'assure qu'elle est au-dessus de tout */
+}
+
+/* Cacher l'input de type checkbox */
+input[type=checkbox] {
+    display: none;
+}
+
+/* Configuration des liens de la barre de navigation */
+.nav-links {
+    display: flex;
+    justify-content: space-around;
+    width: 60%; /* Un peu plus de largeur */
+}
+
+.nav-links li {
+    list-style: none;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    letter-spacing: 2px; /* Un peu moins d'espace */
+    font-weight: bold;
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.nav-links a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Configuration de l'icône burger */
+.burger div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px;
+    border-radius: 3px;
+}
+
+
+.burger {
+    display: none;
+    cursor: pointer;
+}
+
+/*Style du Footer  */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px; /* Espace avant le pied de page */
+}
+
+/* Style du Tableau (pour la Mission 2) */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+table caption {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+th, td {
+    border: 1px solid #C49D83;
+    padding: 10px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #C49D83;
+    color: white;
+}
+
+/* Fait un fond alterné pour la lisibilité */
+tbody tr:nth-child(even) {
+    background-color: #fdfaf5;
+}
+
+/* Styles pour les écrans mobiles (max-width: 768px) */
+@media screen and (max-width: 768px) {
+    .nav-links {
+        /* On le cache initialement */
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 8vh; /* Se place juste sous la nav */
+        height: 92vh; /* Toute la hauteur restante */
+        width: 60%; /* Prend 60% de la largeur */
+        background-color: #333;/*choix de couleur assez sombre pour le footer*/
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 20px;
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+        padding: 15px 0;
+    }
+
+    
+    .burger {
+        display: block;
+    }
+
+    /* Afficher les liens de la barre de navigation lorsque la case est cochée */
+    input[type=checkbox]:checked ~ .nav-links {
+        display: flex;
+    }
+}
